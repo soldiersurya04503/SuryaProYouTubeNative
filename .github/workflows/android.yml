@@ -1,4 +1,3 @@
-
 name: Build Surya Pro YouTube APK
 
 on:
@@ -22,23 +21,20 @@ jobs:
           java-version: '17'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4  # Yahan v3 se v4 kiya gaya hai
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
 
-      - name: Extract Android project
-        run: unzip -q SuryaProYouTubeNative.zip -d extracted
-
+      # Extract wala step hata diya gaya hai
+      
       - name: Build APK
-        working-directory: extracted
-        run: gradle assembleDebug
+        run: gradle assembleDebug # Ye command direct main folder mein chalegi
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: SuryaProYouTube-APK
-          path: extracted/app/build/outputs/apk/debug/app-debug.apk
-          
+          path: app/build/outputs/apk/debug/app-debug.apk # Path check kar lein
